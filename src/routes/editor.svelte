@@ -7,18 +7,8 @@
 	let hidden = false;
 </script>
 
-<header>
-	<input bind:value={name}>
-	<button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? 'Открыть' : 'Скрыть'}</button>
-
-</header>
 <main>
-	<div class="collection" class:hidden>
-	</div>
-	<div class="space">
 		<Drag_n_drop/>
-<!--		<Drag_n_drop/>-->
-	</div>
 </main>
 
 <style>
@@ -31,12 +21,10 @@
 		top: 100px;
 		z-index: 30;
 	}
-	/*main {*/
-	/*	width: 100%;*/
-	/*	height: 100vh;*/
-	/*	display: flex;*/
-	/**/
-	/*}*/
+	.main {
+		margin: 0;
+		padding: 0;
+	}
 	.collection{
 		position: absolute;
 		height: 100%;
@@ -47,7 +35,7 @@
 	}
 	.space{
 		height: 100vh;
-		/*width: 100vh;*/
+		width: 100%;
 		background: lightcoral;
 	}
 	.hide-button{
