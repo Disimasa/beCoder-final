@@ -2,6 +2,14 @@
 import { onMount } from "svelte";
 import interact from "interactjs";
 let hidden = false;
+let elements = [];
+function open_input(event) {
+    console.log(event.target.childElementCount);
+    if (event.clientX > 200) {
+        let input = document.createElement('input');
+        event.target.append(input);
+    }
+}
 onMount(() => {
     interact('.item')
     .resizable({
@@ -49,13 +57,15 @@ onMount(() => {
         listeners: {
         start(event) {
             let target = event.target;
-            let collection_item = target.cloneNode();
-            let parent = document.getElementsByClassName('collection');
-            console.log(target);
-            if (target.id < 4) {
-                parent[0].insertBefore(collection_item, document.getElementById(target.id+1));
-            } else {
-                parent[0].insertBefore(collection_item, document.getElementById('4'));
+            if (event.clientX < 200) {
+                let collection_item = target.cloneNode();
+
+                let parent = document.getElementsByClassName('collection');
+                if (target.id < 4) {
+                    parent[0].insertBefore(collection_item, document.getElementById(target.id + 1));
+                } else {
+                    parent[0].insertBefore(collection_item, document.getElementById('4'));
+                }
             }
         },
             move(event) {
@@ -69,7 +79,11 @@ onMount(() => {
                 target.setAttribute('data-y', y);
             },
             end(event) {
-
+                elements.forEach((el) => {
+                    let block = document.createElement('div');
+                    block.classList.add('item');
+                    block.classList.add('rectangle');
+                })
             }
         }
     })
@@ -79,7 +93,7 @@ onMount(() => {
     <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? 'Открыть' : 'Скрыть'}</button>
     <div class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
     <div class="collection" class:hidden>
-        <div id="1" class="collection_item rectangle item"></div>
+        <div id="1" class="collection_item rectangle item" on:dblclick={open_input}></div>
         <div id="2" class="collection_item oval item"></div>
         <div id="3" class="collection_item circle item"></div>
         <div id="4" class="collection_item triangle item"></div>
