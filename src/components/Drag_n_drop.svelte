@@ -2,10 +2,9 @@
 import { onMount } from "svelte";
 import interact from "interactjs";
 let hidden = false;
-let elements = [];
 function open_input(event) {
-    console.log(event.target.childElementCount);
-    if (event.clientX > 200) {
+    console.log();
+    if (event.clientX > 200 && event.target.childElementCount === 0) {
         let input = document.createElement('input');
         event.target.append(input);
     }
@@ -59,7 +58,7 @@ onMount(() => {
             let target = event.target;
             if (event.clientX < 200) {
                 let collection_item = target.cloneNode();
-
+                collection_item.ondblclick = open_input;
                 let parent = document.getElementsByClassName('collection');
                 if (target.id < 4) {
                     parent[0].insertBefore(collection_item, document.getElementById(target.id + 1));
@@ -79,11 +78,6 @@ onMount(() => {
                 target.setAttribute('data-y', y);
             },
             end(event) {
-                elements.forEach((el) => {
-                    let block = document.createElement('div');
-                    block.classList.add('item');
-                    block.classList.add('rectangle');
-                })
             }
         }
     })
