@@ -47,6 +47,17 @@ onMount(() => {
     autoScroll: true,
 
         listeners: {
+        start(event) {
+            let target = event.target;
+            let collection_item = target.cloneNode();
+            let parent = document.getElementsByClassName('collection');
+            console.log(target);
+            if (target.id < 4) {
+                parent[0].insertBefore(collection_item, document.getElementById(target.id+1));
+            } else {
+                parent[0].insertBefore(collection_item, document.getElementById('4'));
+            }
+        },
             move(event) {
                 let target = event.target;
                 let x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
@@ -68,10 +79,10 @@ onMount(() => {
     <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? 'Открыть' : 'Скрыть'}</button>
     <div class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
     <div class="collection" class:hidden>
-        <div class="collection_item rectangle item"></div>
-        <div class="collection_item oval item"></div>
-        <div class="collection_item circle item"></div>
-        <div class="collection_item triangle item"></div>
+        <div id="1" class="collection_item rectangle item"></div>
+        <div id="2" class="collection_item oval item"></div>
+        <div id="3" class="collection_item circle item"></div>
+        <div id="4" class="collection_item triangle item"></div>
 	</div>
     </div>
 </div>
