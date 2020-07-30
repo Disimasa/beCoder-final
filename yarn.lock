@@ -1237,6 +1237,11 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
+gojs@^2.1.21:
+  version "2.1.21"
+  resolved "https://registry.yarnpkg.com/gojs/-/gojs-2.1.21.tgz#50c094776c3939f5b168f0efb3135dbf4963786c"
+  integrity sha512-AU54Klmapb/1coTv7Li9CkfPIOOQEPoMapRlnGx9TWd6g8qAoA2FihcyPZO6njHAEmWlX4Ri3OM1uGjvG4E8dA==
+
 graceful-fs@^4.1.2:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
