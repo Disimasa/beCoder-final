@@ -1,16 +1,12 @@
-import posts from './_posts.js';
+import { init } from "../../db.js"
 
-const contents = JSON.stringify(posts.map(post => {
-	return {
-		title: post.title,
-		slug: post.slug
-	};
-}));
-
-export function get(req, res) {
+export async function get(req, res) {
+	const { db } = await init();
+	console.log(db)
+	const posts = await db.collection("posts").find({}).toArray();
 	res.writeHead(200, {
 		'Content-Type': 'application/json'
 	});
-
-	res.end(contents);
+	console.log(JSON.stringify(posts))
+	res.end(JSON.stringify(posts));
 }
