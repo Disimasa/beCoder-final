@@ -8,3 +8,9 @@ export async function get(req, res) {
 	});
 	res.end(JSON.stringify(posts));
 }
+
+export async function post(req, res) {
+	let { collection } = await init();
+	await collection.insertOne(req.body)
+	// console.log(req.body)
+}
