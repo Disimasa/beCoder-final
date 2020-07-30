@@ -3,7 +3,7 @@
     import {onMount} from "svelte";
 
     onMount(() => {
-        var diagram = new go.Diagram("myDiagramDiv");
+        let diagram = new go.Diagram("myDiagramDiv");
         diagram.model = new go.GraphLinksModel(
                 [{key: "Hello"},   // two node data, in an Array
                     {key: "World!"}],
@@ -12,4 +12,4 @@
     });
 </script>
 
-<div id="myDiagramDiv" style="border: solid 1px blue; width:400px; height:150px"></div>
+<div id="myDiagramDiv" style="border: solid 1px blue; width: 400px; height: 150px"></div>
