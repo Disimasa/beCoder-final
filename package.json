@@ -16,6 +16,7 @@
     "compression": "^1.7.1",
     "gojs": "^2.1.21",
     "interactjs": "^1.9.20",
+    "jointjs": "^3.2.0",
     "mongodb": "^3.5.9",
     "polka": "next",
     "sirv": "^0.4.0"
