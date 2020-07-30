@@ -2,8 +2,9 @@ import { init } from "../../db.js";
 
 export async function get(req, res, next) {
 	const { slug } = req.params;
-	const { db } = await init()
-	const post = await db.collection("posts").findOne({slug});
+	const { collection } = await init()
+	const post = await collection.findOne({slug});
+
 	if (post) {
 		res.writeHead(200, {
 			'Content-Type': 'application/json'
