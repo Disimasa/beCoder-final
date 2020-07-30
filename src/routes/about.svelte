@@ -1,7 +1,8 @@
+<script>
+import Drag_n_drop from '../components/Drag_n_drop.svelte'
+</script>
 <svelte:head>
 	<title>About</title>
 </svelte:head>
 
-<h1>About this site</h1>
-
-<p>This is the 'about' page. There's not much here.</p>
+<Drag_n_drop/>
