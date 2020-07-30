@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "compression": "^1.7.1",
+    "interactjs": "^1.9.20",
     "mongodb": "^3.5.9",
     "polka": "next",
     "sirv": "^0.4.0"

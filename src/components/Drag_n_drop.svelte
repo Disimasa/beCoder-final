@@ -1,26 +1,9 @@
 <script>
+import { onMount } from "svelte";
 import interact from "interactjs";
-function dragMoveListener (event) {
-    let target = event.target,
-        // keep the dragged position in the data-x/data-y attributes
-        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-    // translate the element
-    target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)';
-
-    // update the posiion attributes
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-  }
-
-  // this is used later in the resizing and gesture demos
-  window.dragMoveListener = dragMoveListener;
-interact('.resize-drag')
-  .resizable({
-    // resize from all edges and corners
+onMount(() => {
+    interact('.item')
+    .resizable({
     edges: { left: true, right: true, bottom: true, top: true },
 
     listeners: {
@@ -40,6 +23,9 @@ interact('.resize-drag')
         target.style.webkitTransform = target.style.transform =
           'translate(' + x + 'px,' + y + 'px)';
 
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+        target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height);
       }
     },
     modifiers: [
@@ -56,38 +42,46 @@ interact('.resize-drag')
 
     inertia: true
   })
-  .draggable({
-    listeners: { move: window.dragMoveListener },
-    inertia: true,
+    .draggable ({
+        inertia: true,
+    // keep the element within the area of it's parent
     modifiers: [
       interact.modifiers.restrictRect({
         restriction: 'parent',
         endOnly: true
       })
-    ]
-  })
+    ],
+    // enable autoScroll
+    autoScroll: true,
+
+        listeners: {
+            move(event) {
+                let target = event.target;
+                let x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                let y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+                target.style.webkitTransform =
+                target.style.transform =
+                'translate(' + x + 'px, ' + y + 'px)';
+                target.setAttribute('data-x', x);
+                target.setAttribute('data-y', y);
+            }
+        }
+    })
+})
 </script>
 <div class="component">
-<div class="resize-drag">
-    Resize from any edge or corner
-  </div>
+<div class="item">qwe</div>
 </div>
 <style>
     .component {
         width: 100%;
+        height: 500px;
     }
-.resize-drag {
-  background-color: #29e;
-  color: white;
-  font-size: 20px;
-  font-family: sans-serif;
-  border-radius: 8px;
-  padding: 20px;
-  touch-action: none;
-
-  width: 120px;
-
-  /* This makes things *much* easier */
-  box-sizing: border-box;
+.item {
+    background: brown;
+    width: 100px;
+    height: 100px;
+    touch-action: none;
+    margin: 0;
 }
 </style>
