@@ -6,6 +6,7 @@
     ];
 </script>
 <style>
+		@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
     section {
 			  padding-top: 200px;
         background-color: #FAFAFA;
@@ -19,9 +20,13 @@
         padding: 0;
         font-size: 2em;
 				color: #6574FF;
-    }
+				font-family: Comfortaa, sans-serif;
+				font-weight: 700;
+		}
 
     h2 {
+				font-family: Comfortaa, sans-serif;
+				font-weight: 400;
         margin: 0;
         padding: 0;
         font-size: 1em;
@@ -79,3 +84,4 @@
         </div>
     </div>
 </section>
+
