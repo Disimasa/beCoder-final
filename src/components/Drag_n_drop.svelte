@@ -24,7 +24,6 @@ function new_arrow(event) {
     }
 }
 function delete_block(e) {
-function delete_block(e) {
     console.log(elements);
     if (chosen_block != null && (e.keyCode===8 || e.keyCode === 46)) {
         elements.forEach((el, index) => {
@@ -145,7 +144,7 @@ onMount(() => {
     </div>
     <div class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
     <div class="collection" class:hidden>
-        <button on:click="{() => arrow_mode = true}"></button>
+        <button on:click="{() => arrow_mode = !arrow_mode}" class="collection_item arrow_button"><img class="arrow" src="left-arrow.png" alt=""></button>
         <div class="collection_item rectangle" on:mousedown="{() => new_block('rectangle')}" on:mouseup={update}></div>
         <div class="collection_item oval" on:mousedown="{() => new_block('oval')}" on:mouseup={update}></div>
         <div class="collection_item circle" on:mousedown="{() => new_block('circle')}" on:mouseup={update}></div>
@@ -205,6 +204,16 @@ onMount(() => {
         align-items: center;
         padding: 20px 0;
 	}
+    .arrow_button {
+        background: #FFFFFF;
+        border: 0;
+        outline: none;
+    }
+    .arrow {
+        width: 100px;
+        height: 100px;
+        transform: rotate(90deg);
+    }
     .collection_item {
         margin: 20px 0;
     }
@@ -230,7 +239,6 @@ onMount(() => {
         top:200px;
         width: 70px;
 	    height: 70px;
-	    transform: rotate(45deg);
         background: #FFFFFF;
     }
     .circle {
@@ -283,8 +291,5 @@ onMount(() => {
     }
     .input_title:hover {
         cursor: pointer;
-    }
-    .triangle .input_title {
-        transform: rotate(-45deg);
     }
 </style>
