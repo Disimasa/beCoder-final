@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
 <script>
 import { onMount } from "svelte";
 import interact from "interactjs";
@@ -122,66 +123,99 @@ onMount(() => {
 </script>
 <svelte:window on:keydown={delete_block} on:keyup={update}/>
 <div class="component">
+    <div class="header">
     <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? 'Открыть' : 'Скрыть'}</button>
+        <button class="save_button">Сохранить</button>
+    </div>
     <div class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
     <div class="collection" class:hidden>
-        <button on:click={new_arrow}></button>
         <div class="collection_item rectangle" on:mousedown="{() => new_block('rectangle')}" on:mouseup={update}></div>
         <div class="collection_item oval" on:mousedown="{() => new_block('oval')}" on:mouseup={update}></div>
         <div class="collection_item circle" on:mousedown="{() => new_block('circle')}" on:mouseup={update}></div>
         <div class="collection_item triangle" on:mousedown="{() => new_block('triangle')}" on:mouseup={update}></div>
 	</div>
         {#each elements as el}
-        <div id = {el['id']} class="item {chosen_block === el['id'] ? 'chosen_block':''} {el['type']}" on:mousedown="{() => chosen_block = el['id']}"></div>
+        <div id = {el['id']} class="item {chosen_block === el['id'] ? 'chosen_block':''} {el['type']}" on:mousedown="{() => chosen_block = el['id']}">
+            <input class="input_title">
+        </div>
             {/each}
     </div>
 </div>
 <style>
     .component {
         width: 100%;
-        height: 500px;
-        margin: 30px 30px;
+        height: 90%;
+    }
+    .header {
+        background: #FFFFFF;
+        box-shadow: 0 7px 7px -3px rgba(13, 7, 7, 0.15);
+        width: 100%;
+        height: 70px;
+        display: flex;
+        align-items: center;
+    }
+
+    .hide-button, .save_button {
+        border: 2px solid #6476ff;
+        border-radius: 10px;
+        width: 170px;
+        height: 50px;
+        padding: 5px 20px;
+        background: #FFFFFF;
+        font-family: 'Comfortaa', cursive;
+        font-size: 20px;
+        margin: 0 20px;
+        outline: none;
+    }
+    .hide-button:hover, .save_button:hover {
+        cursor: pointer;
+        background: #6476ff;
+        color: white;
     }
     .collection{
 		position: fixed;
 		height: 100%;
         left: 0;
 		width: 200px;
-		background: #333333;
+		background: #FFFFFF;
 		transition: transform 1s ease;
 		z-index: 20;
+        top: 66px;
+        box-shadow: 7px 0 7px -3px rgba(13, 7, 7, 0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
 	}
     .collection_item {
-        position: absolute;
-        left: 20px;
-        margin: 30px 20px;
+        margin: 20px 0;
     }
     .collection_item:hover {
         cursor: pointer;
     }
     .rectangle {
-        background: red;
+        border: 5px solid #6476ff;
+        background: #FFFFFF;
         width: 130px;
         height: 70px;
     }
     .oval {
+        border: 5px solid #6476ff;
         top:100px;
-        background: red;
         width: 130px;
         height: 70px;
         border-radius: 50px;
     }
     .triangle {
+        border: 5px solid #6476ff;
         top:200px;
-        width: 0;
-	height: 0;
-	border-left: 60px solid transparent;
-	border-right: 60px solid transparent;
-	border-bottom: 100px solid red;
+        width: 70px;
+	    height: 70px;
+	    transform: rotate(45deg);
     }
     .circle {
+        border: 5px solid #6476ff;
         top: 350px;
-        background: red;
         width: 70px;
         height: 70px;
         border-radius: 70px;
@@ -212,5 +246,23 @@ onMount(() => {
     }
     .chosen_block {
         border: 2px solid brown;
+    }
+    .input_title {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: 0;
+        outline: none;
+        text-align: center;
+        font-family: 'Comfortaa', cursive;
+    }
+    .input_title:active {
+        border: 0;
+    }
+    .input_title:hover {
+        cursor: pointer;
+    }
+    .triangle .input_title {
+        transform: rotate(-45deg);
     }
 </style>
