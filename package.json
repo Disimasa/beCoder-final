@@ -19,7 +19,8 @@
     "jointjs": "^3.2.0",
     "mongodb": "^3.5.9",
     "polka": "next",
-    "sirv": "^0.4.0"
+    "sirv": "^0.4.0",
+    "svelte-moveable": "^0.9.3"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

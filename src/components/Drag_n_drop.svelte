@@ -3,11 +3,15 @@ import { onMount } from "svelte";
 import interact from "interactjs";
 let hidden = false;
 let elements = [];
+
+let selectedNode = null;
+
 function open_input(event) {
-    console.log(event.target.childElementCount);
     if (event.clientX > 200) {
-        let input = document.createElement('input');
-        event.target.append(input);
+        // let input = document.createElement('input');
+        selectedNode = event.target;
+        selectedNode.classList.add("selected-item")
+        selectedNode.children.input.focus();
     }
 }
 onMount(() => {
@@ -59,7 +63,7 @@ onMount(() => {
             let target = event.target;
             if (event.clientX < 200) {
                 let collection_item = target.cloneNode();
-
+                collection_item.ondblclick = open_input;
                 let parent = document.getElementsByClassName('collection');
                 if (target.id < 4) {
                     parent[0].insertBefore(collection_item, document.getElementById(target.id + 1));
@@ -93,14 +97,17 @@ onMount(() => {
     <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? 'Открыть' : 'Скрыть'}</button>
     <div class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
     <div class="collection" class:hidden>
-        <div id="1" class="collection_item rectangle item" on:dblclick={open_input}></div>
-        <div id="2" class="collection_item oval item"></div>
-        <div id="3" class="collection_item circle item"></div>
-        <div id="4" class="collection_item triangle item"></div>
+        <div id="1" class="collection_item rectangle item selected-item" on:dblclick={open_input}><input></div>
+        <div id="2" class="collection_item oval item"><input></div>
+        <div id="3" class="collection_item circle item"><input></div>
+        <div id="4" class="collection_item triangle item"><input></div>
 	</div>
     </div>
 </div>
 <style>
+    .selected-item {
+        border: 2px solid cornflowerblue;
+    }
     .component {
         width: 100%;
         height: 500px;
