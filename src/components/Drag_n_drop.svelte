@@ -2,16 +2,11 @@
 import { onMount } from "svelte";
 import interact from "interactjs";
 let hidden = false;
-let elements = [];
-
-let selectedNode = null;
-
 function open_input(event) {
-    if (event.clientX > 200) {
-        // let input = document.createElement('input');
-        selectedNode = event.target;
-        selectedNode.classList.add("selected-item")
-        selectedNode.children.input.focus();
+    console.log();
+    if (event.clientX > 200 && event.target.childElementCount === 0) {
+        let input = document.createElement('input');
+        event.target.append(input);
     }
 }
 onMount(() => {
@@ -83,11 +78,6 @@ onMount(() => {
                 target.setAttribute('data-y', y);
             },
             end(event) {
-                elements.forEach((el) => {
-                    let block = document.createElement('div');
-                    block.classList.add('item');
-                    block.classList.add('rectangle');
-                })
             }
         }
     })
@@ -97,17 +87,14 @@ onMount(() => {
     <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? 'Открыть' : 'Скрыть'}</button>
     <div class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
     <div class="collection" class:hidden>
-        <div id="1" class="collection_item rectangle item selected-item" on:dblclick={open_input}><input></div>
-        <div id="2" class="collection_item oval item"><input></div>
-        <div id="3" class="collection_item circle item"><input></div>
-        <div id="4" class="collection_item triangle item"><input></div>
+        <div id="1" class="collection_item rectangle item" on:dblclick={open_input}></div>
+        <div id="2" class="collection_item oval item"></div>
+        <div id="3" class="collection_item circle item"></div>
+        <div id="4" class="collection_item triangle item"></div>
 	</div>
     </div>
 </div>
 <style>
-    .selected-item {
-        border: 2px solid cornflowerblue;
-    }
     .component {
         width: 100%;
         height: 500px;
