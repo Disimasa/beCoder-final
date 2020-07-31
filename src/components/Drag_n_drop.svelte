@@ -2,29 +2,19 @@
 <script>
     import {onMount} from "svelte";
     import interact from "interactjs";
-    import * as d3 from 'd3';
 
     let chosen_block = null;
     let hidden = false;
-    let arrow_mode = false;
-    let first_point = null;
     let count = 0;
-    let elements = [];
     let area;
+    let elements = [];
 
+    function new_arrow(target) {
+    }
 
-    function new_arrow(event) {
-        if (arrow_mode === true) {
-            if (first_point === null) {
-                first_point = event.target;
-                console.log(1);
-            } else {
-                console.log(first_point.getBoundingClientRect()['x']);
-                let svg = d3.select('.drag_n_drop_area').append('svg');
-                svg.style("height", "100%").style("width", "100%").style("position", "fixed").style("left", 0).style("top", 0).style("z-index", 0);
-                svg.append("line").style("stroke", "gray").attr("x1", first_point.getBoundingClientRect()['x'] + first_point.getBoundingClientRect()['width'] / 2).attr("y1", first_point.getBoundingClientRect()['y'] + first_point.getBoundingClientRect()['height'] / 2).attr("x2", event.target.getBoundingClientRect()['x'] + event.target.getBoundingClientRect()['width'] / 2).attr("y2", event.target.getBoundingClientRect()['y'] + event.target.getBoundingClientRect()['height'] / 2);
-                first_point = null;
-            }
+    function removeSelection(e) {
+        if (e.target === area) {
+            chosen_block = -1;
         }
     }
 
@@ -36,6 +26,7 @@
                     elements.splice(index, 1);
                 }
             });
+            elements = elements;
             chosen_block = null;
         }
     }
@@ -45,16 +36,9 @@
             let input = document.createElement('input');
             input.classList.add('input_title');
             event.target.append(input);
+
         }
     }
-
-
-    function removeSelection(e) {
-        if (e.target === area) {
-            chosen_block = -1;
-        }
-    }
-
 
     function new_block(type) {
         elements = [...elements, {'id': count, 'x': 500, 'y': 500, 'type': type}];
@@ -154,14 +138,11 @@
 <svelte:window on:keydown={delete_block} on:keyup={update} on:mousedown={removeSelection}/>
 <div class="component">
     <div class="header">
-        <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? '>' : '<'}</button>
+        <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? '<' : '>'}</button>
         <button class="save_button"><img class="save-icon" src="save.svg"></button>
     </div>
     <div bind:this={area} class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
         <div class="collection" class:hidden>
-            <button on:click="{() => arrow_mode = !arrow_mode}" class="collection_item arrow_button"><img class="arrow" src="left-arrow.png"
-                                                                                                          alt="">
-            </button>
             <div class="collection_item rectangle" on:mousedown="{() => new_block('rectangle')}"
                  on:mouseup={update}></div>
             <div class="collection_item oval" on:mousedown="{() => new_block('oval')}" on:mouseup={update}></div>
@@ -171,7 +152,7 @@
         </div>
         {#each elements as el}
             <div id={el['id']} class="item {chosen_block === el['id'] ? 'chosen_block':''} {el['type']}"
-                 on:mousedown="{() => chosen_block = el['id']}" on:click={new_arrow}>
+                 on:mousedown="{() => chosen_block = el['id']}">
                 <input class="input_title">
             </div>
         {/each}
@@ -180,7 +161,7 @@
 <style>
     .component {
         width: 100%;
-        height: 100%;
+        height: 90%;
     }
 
     .header {
@@ -197,7 +178,6 @@
         border: none;
         background: none;
     }
-
     .save-icon {
         width: 60px;
         height: 60px;
@@ -206,7 +186,6 @@
     .save_button:hover {
         cursor: pointer;;
     }
-
     .hide-button {
         margin-left: 20px;
         margin-top: -5px;
@@ -217,8 +196,7 @@
         color: #6476ff;
         box-shadow: none;
     }
-
-    .hide-button:active {
+    .hide-button:active{
         box-shadow: none;
     }
 
@@ -236,18 +214,6 @@
         flex-direction: column;
         align-items: center;
         padding: 20px 0;
-    }
-
-    .arrow_button {
-        background: #FFFFFF;
-        border: 0;
-        outline: none;
-    }
-
-    .arrow {
-        width: 100px;
-        height: 100px;
-        transform: rotate(90deg);
     }
 
     .collection_item {
@@ -278,7 +244,7 @@
         top: 200px;
         width: 70px;
         height: 70px;
-        background: #FFFFFF;
+        transform: rotate(45deg);
     }
 
     .circle {
@@ -312,7 +278,6 @@
         position: fixed;
         top: 500px;
         left: 500px;
-        z-index: 20;
     }
 
     .nothing {
@@ -339,5 +304,9 @@
 
     .input_title:hover {
         cursor: pointer;
+    }
+
+    .triangle .input_title {
+        transform: rotate(-45deg);
     }
 </style>
