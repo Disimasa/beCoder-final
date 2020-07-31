@@ -20,8 +20,8 @@
             } else {
                 console.log(first_point.getBoundingClientRect()['x']);
                 let svg = d3.select('.drag_n_drop_area').append('svg');
-                svg.style("height", "100%").style("width", "100%").style("position", "fixed").style("left", 0).style("top", 0).style("z-index", 0);
-                svg.append("line").style("stroke", "gray").attr("x1", first_point.getBoundingClientRect()['x'] + first_point.getBoundingClientRect()['width'] / 2).attr("y1", first_point.getBoundingClientRect()['y'] + first_point.getBoundingClientRect()['height'] / 2).attr("x2", event.target.getBoundingClientRect()['x'] + event.target.getBoundingClientRect()['width'] / 2).attr("y2", event.target.getBoundingClientRect()['y'] + event.target.getBoundingClientRect()['height'] / 2);
+                svg.style("height", "100%").style("width", "100%").style("position", "fixed").style("left", 0).style("z-index", 0);
+                svg.append("line").style("stroke", "gray").attr("x1", first_point.getBoundingClientRect()['x'] + first_point.getBoundingClientRect()['width'] / 2).attr("y1", first_point.getBoundingClientRect()['y'] -70 + first_point.getBoundingClientRect()['height'] / 2).attr("x2", event.target.getBoundingClientRect()['x'] + event.target.getBoundingClientRect()['width'] / 2).attr("y2", event.target.getBoundingClientRect()['y'] - 70 + event.target.getBoundingClientRect()['height'] / 2);
                 first_point = null;
             }
         }
@@ -319,7 +319,9 @@
     .nothing {
         top: 200px;
     }
+    .chosen_arr {
 
+    }
     .chosen_block {
         border: 4px solid #6EFAFB;
     }
