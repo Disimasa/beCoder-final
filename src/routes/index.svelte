@@ -13,7 +13,7 @@
         font-family: Comfortaa, sans-serif;
         font-weight: bold;
         font-size: 2.5em;
-        color: #525252;
+        color: #858585;
         padding-bottom: 40px;
     }
     section {
@@ -79,7 +79,7 @@
 
     p {
         font-size: 40px;
-        color: #525252;
+        color: #858585;
     }
 
 </style>
