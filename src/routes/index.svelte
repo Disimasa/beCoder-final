@@ -8,8 +8,6 @@
         {name: "Project 3", text: "Wonder!", onclick: "document.location.href = '/editor'", class_: "alternate"}
     ];
     setContext('poj', projects);
-      
-      
 </script>
 
 

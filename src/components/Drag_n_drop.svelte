@@ -156,7 +156,7 @@
     </div>
     <div bind:this={area} class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
         <div class="collection" class:hidden>
-            <button on:click="{() => arrow_mode = !arrow_mode}" class="collection_item arrow_button"><img class="arrow" src="left-arrow.png"
+            <button on:click="{() => arrow_mode = !arrow_mode}" class:arrow_mode class="collection_item arrow_button"><img class="arrow" src="left-arrow.png"
                                                                                                           alt="">
             </button>
             <div class="collection_item rectangle" on:mousedown="{() => new_block('rectangle')}"
@@ -175,6 +175,11 @@
     </div>
 </div>
 <style>
+    .arrow_mode {
+        border: 2px solid #858585;
+        border-radius: 20px;
+        background: #333333;
+    }
     .component {
         width: 100%;
         height: 100%;
@@ -202,7 +207,8 @@
     }
 
     .save_button:hover {
-        cursor: pointer;;
+        cursor: pointer;
+        background: none;
     }
 
     .hide-button {
@@ -214,11 +220,6 @@
         font-size: 40px;
         color: #6476ff;
         box-shadow: none;
-    }
-    .hide-button:hover, .save_button:hover {
-        cursor: pointer;
-        background: #6476ff;
-        color: white;
     }
 
     .collection {
@@ -238,8 +239,8 @@
     }
 
     .arrow_button {
-        background: #FFFFFF;
-        border: 0;
+        background: transparent;
+        border: 2px solid transparent;
         outline: none;
     }
 

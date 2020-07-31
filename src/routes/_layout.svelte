@@ -15,6 +15,7 @@
 	/*}*/
 </style>
 
+<Nav/>
 <!--<main>-->
 <slot></slot>
 <!--</main>-->

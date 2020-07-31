@@ -1,9 +1,11 @@
 <script>
 	export let segment;
+	console.log(segment);
 </script>
 
 <style>
 	nav {
+		display: none;
 		border-bottom: 1px solid rgba(255,62,0,0.1);
 		font-weight: 300;
 		padding: 0 1em;
@@ -50,11 +52,11 @@
 
 <nav>
 	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
+		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">Проекты</a></li>
 		<li><a aria-current="{segment === 'editor' ? 'page' : undefined}" href="editor">Редактор</a></li>
-		<li><a aria-current="{segment === 'semyon' ? 'page' : undefined}" href="semyon">Страница Семена</a></li>
+<!--		<li><a aria-current="{segment === 'semyon' ? 'page' : undefined}" href="semyon">Страница Семена</a></li>-->
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>
+<!--		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>-->
 	</ul>
 </nav>

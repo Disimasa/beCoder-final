@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
-    "build": "sapper build --legacy",
+    "build": "sapper export",
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
@@ -21,10 +21,10 @@
     "jointjs": "^3.2.0",
     "leader-line": "^1.0.5",
     "mongodb": "^3.5.9",
+    "now": "^19.2.0",
     "polka": "next",
     "sirv": "^0.4.0",
-    "skeleton-loader": "^2.0.0",
-    "svelte-moveable": "^0.9.3"
+    "skeleton-loader": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
