@@ -2,7 +2,7 @@
 <script>
     import {onMount} from "svelte";
     import interact from "interactjs";
-
+    import * as d3 from 'd3'
     let chosen_block = null;
     let hidden = false;
     let arrow_mode = false;
@@ -270,6 +270,7 @@
         width: 130px;
         height: 70px;
         border-radius: 50px;
+        background: #FFFFFF;
     }
 
     .triangle {
