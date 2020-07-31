@@ -2,6 +2,7 @@
 <script>
     import {onMount} from "svelte";
     import interact from "interactjs";
+    import { fly } from 'svelte/transition';
     import * as d3 from 'd3'
     let chosen_block = null;
     let hidden = false;
@@ -10,8 +11,9 @@
     let count = 0;
     let elements = [];
     let area;
-
-
+    let detailed = false;
+    let detailed_title;
+    let titles = [];
     function new_arrow(event) {
         if (arrow_mode === true) {
             if (first_point === null) {
@@ -34,7 +36,7 @@
 
     function delete_block(e) {
         console.log(elements);
-        if (chosen_block != null && (e.keyCode === 8 || e.keyCode === 46)) {
+        if (chosen_block != null && e.keyCode === 46) {
             elements.forEach((el, index) => {
                 if (chosen_block === el['id']) {
                     elements.splice(index, 1);
@@ -168,10 +170,19 @@
         </div>
         {#each elements as el}
             <div id={el['id']} class="item {chosen_block === el['id'] ? 'chosen_block':''} {el['type']}"
-                 on:mousedown="{() => chosen_block = el['id']}" on:click={new_arrow}>
-                <input class="input_title">
+                 on:mousedown="{() => chosen_block = el['id']}" on:click={new_arrow} on:dblclick="{() => {detailed = true; chosen_block= null}}">
+                <input class="input_title" bind:value={detailed_title}>
             </div>
         {/each}
+        {#if detailed}
+        <div class="detailed_card">
+            <div class="rectangle title">
+                <div>
+            {detailed_title}
+                </div>
+            </div>
+        </div>
+            {/if}
     </div>
 </div>
 <style>
@@ -325,6 +336,7 @@
     }
     .chosen_block {
         border: 4px solid #6EFAFB;
+        z-index: 28;
     }
 
     .input_title {
@@ -340,8 +352,21 @@
     .input_title:active {
         border: 0;
     }
-
+    .title {
+        margin: 10px 10px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
     .input_title:hover {
         cursor: pointer;
+    }
+    .detailed_card {
+        position: absolute;
+        width: 100%;
+        height: 98%;
+        background: #FFFFFF;
+        z-index: 40;
+        margin-top: 5px;
     }
 </style>

@@ -91,9 +91,9 @@
                 <h2>{text}</h2>
             </div>
         {/each}
-        <Modal>
-        <Content />
-        </Modal><!--
+        <Modal/>
+        <Content/>
+        <!--
         <div class="card new" onclick="document.location.href = '/editor'">
             <p style="font-size:10vh">+</p>
         </div>-->
