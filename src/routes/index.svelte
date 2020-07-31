@@ -1,10 +1,20 @@
 <script>
+	import Content from './Content.svelte';
+    import Modal from './Modal.svelte';
+	import { setContext } from 'svelte';
     let projects = [
-        {name: "Project 1", text: "Great!", onclick: "alert('Project_1');", class_: "alternate"},
-        {name: "Project 2", text: "Nice!", onclick: "alert('Project_2');", class_: "alternate"},
-        {name: "Project 3", text: "Wonder!", onclick: "alert('Project_3');", class_: "alternate"}
+        {name: "Project 1", text: "Great!", onclick: "document.location.href = '/editor'", class_: "alternate"},
+        {name: "Project 2", text: "Nice!", onclick: "document.location.href = '/editor'", class_: "alternate"},
+        {name: "Project 3", text: "Wonder!", onclick: "document.location.href = '/editor'", class_: "alternate"}
     ];
+    setContext('poj', projects);
+      
+      
 </script>
+
+
+
+
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
     .header-h1 {
@@ -69,18 +79,6 @@
         box-shadow: 0 0 40px 3px #D6D6D6;
     }
 
-    .project {
-
-    }
-
-    .new {
-
-    }
-
-    p {
-        font-size: 40px;
-        color: #858585;
-    }
 
 </style>
 <head>
@@ -95,9 +93,12 @@
                 <h2>{text}</h2>
             </div>
         {/each}
+        <Modal>
+        <Content />
+        </Modal><!--
         <div class="card new" onclick="document.location.href = '/editor'">
             <p style="font-size:10vh">+</p>
-        </div>
+        </div>-->
     </div>
 </section>
 

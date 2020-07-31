@@ -1,1 +1,8 @@
-<h1>Страница Семена</h1>
+<script>
+	import Content from './Content.svelte';
+  import Modal from './Modal.svelte';
+</script>
+
+<Modal>
+	<Content />
+</Modal>
