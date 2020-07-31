@@ -151,7 +151,7 @@
 <svelte:window on:keydown={delete_block} on:keyup={update} on:mousedown={removeSelection}/>
 <div class="component">
     <div class="header">
-        <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? '<' : '>'}</button>
+        <button class="hide-button" on:click={() => hidden = !hidden}>{hidden ? '>' : '<'}</button>
         <button class="save_button"><img class="save-icon" src="save.svg"></button>
     </div>
     <div bind:this={area} class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
@@ -177,10 +177,11 @@
 <style>
     .component {
         width: 100%;
-        height: 90%;
+        height: 100%;
     }
 
     .header {
+        z-index: 25;
         background: #FFFFFF;
         box-shadow: 0 7px 7px -3px rgba(13, 7, 7, 0.15);
         width: 100%;
@@ -194,6 +195,7 @@
         border: none;
         background: none;
     }
+
     .save-icon {
         width: 60px;
         height: 60px;
@@ -202,6 +204,7 @@
     .save_button:hover {
         cursor: pointer;;
     }
+
     .hide-button {
         margin-left: 20px;
         margin-top: -5px;
@@ -212,9 +215,10 @@
         color: #6476ff;
         box-shadow: none;
     }
-
-    .hide-button:active {
-        box-shadow: none;
+    .hide-button:hover, .save_button:hover {
+        cursor: pointer;
+        background: #6476ff;
+        color: white;
     }
 
     .collection {
@@ -254,34 +258,35 @@
     }
 
     .rectangle {
-        border: 3px solid #6476ff;
+        border: 5px solid #6476ff;
         background: #FFFFFF;
         width: 130px;
         height: 70px;
     }
 
     .oval {
-        border: 3px solid #6476ff;
-        top: 100px;
+        border: 5px solid #6476ff;
+        top:100px;
         width: 130px;
         height: 70px;
         border-radius: 50px;
     }
 
     .triangle {
-        border: 3px solid #6476ff;
-        top: 200px;
+        border: 5px solid #6476ff;
+        top:200px;
         width: 70px;
-        height: 70px;
+	    height: 70px;
         background: #FFFFFF;
     }
 
     .circle {
-        border: 3px solid #6476ff;
+        border: 5px solid #6476ff;
         top: 350px;
         width: 70px;
         height: 70px;
         border-radius: 70px;
+        background: #FFFFFF;
     }
 
     .hidden {
@@ -334,9 +339,5 @@
 
     .input_title:hover {
         cursor: pointer;
-    }
-
-    .triangle .input_title {
-        transform: rotate(-45deg);
     }
 </style>
