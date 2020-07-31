@@ -2,12 +2,28 @@
 <script>
 import { onMount } from "svelte";
 import interact from "interactjs";
+import * as d3 from 'd3';
 let chosen_block = null;
 let hidden = false;
+let arrow_mode = false;
+let first_point = null;
 let count = 0;
 let elements = [];
-function new_arrow(target) {
+function new_arrow(event) {
+    if (arrow_mode === true) {
+        if (first_point === null) {
+            first_point = event.target;
+            console.log(1);
+        } else {
+            console.log(first_point.getBoundingClientRect()['x']);
+            let svg = d3.select('.drag_n_drop_area').append('svg');
+            svg.style("height", "100%").style("width", "100%").style("position", "fixed").style("left", 0).style("top", 0).style("z-index", 0);
+            svg.append("line").style("stroke", "gray").attr("x1", first_point.getBoundingClientRect()['x']+first_point.getBoundingClientRect()['width']/2).attr("y1", first_point.getBoundingClientRect()['y']+first_point.getBoundingClientRect()['height']/2).attr("x2", event.target.getBoundingClientRect()['x'] + event.target.getBoundingClientRect()['width']/2).attr("y2", event.target.getBoundingClientRect()['y'] + event.target.getBoundingClientRect()['height']/2);
+            first_point = null;
+        }
+    }
 }
+function delete_block(e) {
 function delete_block(e) {
     console.log(elements);
     if (chosen_block != null && (e.keyCode===8 || e.keyCode === 46)) {
@@ -129,13 +145,14 @@ onMount(() => {
     </div>
     <div class="drag_n_drop_area {hidden === false ? 'small_area' : 'big_area'}">
     <div class="collection" class:hidden>
+        <button on:click="{() => arrow_mode = true}"></button>
         <div class="collection_item rectangle" on:mousedown="{() => new_block('rectangle')}" on:mouseup={update}></div>
         <div class="collection_item oval" on:mousedown="{() => new_block('oval')}" on:mouseup={update}></div>
         <div class="collection_item circle" on:mousedown="{() => new_block('circle')}" on:mouseup={update}></div>
         <div class="collection_item triangle" on:mousedown="{() => new_block('triangle')}" on:mouseup={update}></div>
 	</div>
         {#each elements as el}
-        <div id = {el['id']} class="item {chosen_block === el['id'] ? 'chosen_block':''} {el['type']}" on:mousedown="{() => chosen_block = el['id']}">
+        <div id = {el['id']} class="item {chosen_block === el['id'] ? 'chosen_block':''} {el['type']}" on:mousedown="{() => chosen_block = el['id']}" on:click={new_arrow}>
             <input class="input_title">
         </div>
             {/each}
@@ -144,9 +161,10 @@ onMount(() => {
 <style>
     .component {
         width: 100%;
-        height: 90%;
+        height: 100%;
     }
     .header {
+        z-index: 25;
         background: #FFFFFF;
         box-shadow: 0 7px 7px -3px rgba(13, 7, 7, 0.15);
         width: 100%;
@@ -205,6 +223,7 @@ onMount(() => {
         width: 130px;
         height: 70px;
         border-radius: 50px;
+        background: #FFFFFF;
     }
     .triangle {
         border: 5px solid #6476ff;
@@ -212,6 +231,7 @@ onMount(() => {
         width: 70px;
 	    height: 70px;
 	    transform: rotate(45deg);
+        background: #FFFFFF;
     }
     .circle {
         border: 5px solid #6476ff;
@@ -219,6 +239,7 @@ onMount(() => {
         width: 70px;
         height: 70px;
         border-radius: 70px;
+        background: #FFFFFF;
     }
     .hidden {
 		transform: translate(-200px, 0);
@@ -240,6 +261,7 @@ onMount(() => {
     position: fixed;
     top: 500px;
     left: 500px;
+    z-index: 20;
 }
     .nothing {
         top:200px;
